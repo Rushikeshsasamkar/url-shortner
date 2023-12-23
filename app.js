@@ -4,7 +4,7 @@ const createHttpError = require('http-errors')
 const mongoose = require('mongoose')
 const path = require('path')
 const ShortUrl = require('./models/url.model')
-const env = require('dotenv').config()
+const env = require('dotenv').config('./env')
 
 const app = express()
 app.use(express.static(path.join(__dirname, 'public')))
@@ -12,7 +12,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 mongoose
-  .connect(env.Database, {
+  .connect(process.env.DATABASE, {
     dbName: 'url-shortner',
     useNewUrlParser: true,
     useUnifiedTopology: true,
